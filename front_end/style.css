@@ -1,0 +1,135 @@
+/* 
+Todo: 
+- events div also weird
+- color scheme... and font... verdana is ugly
+*/
+
+:root{
+    --black: rgb(0, 0, 0);
+    --white: rgb(255, 255, 255);
+    --red: rgb(166, 36, 24);
+    --light: rgb(244, 248, 244);
+
+}
+*{
+    text-align: center;
+    font: 20px Verdana, sans-serif;
+}
+body{
+    background-color: var(--light);
+    margin: 0px 5% 0px 5%;
+}
+h1,span{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.calendar{
+    display: grid;
+}
+.left-block{
+    display: block;
+    margin-top: 30px;
+}
+.month{
+    background-color: var(--red);
+    display: inline-block;
+    border-radius: 5px 5px 0px 0px;
+}
+.fa-solid{
+    font-size: 1.4rem;
+    position: absolute;
+    top: 50px;
+}
+.fa-solid:hover{
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.fa-caret-left{
+    left: 20%;
+}
+.fa-caret-right{
+    right: 20%;
+}
+.days{
+    background-color: beige;
+    display: grid;
+    grid: auto / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    border-radius: 0px 0px 5px 5px;
+}
+.days > div{
+    margin: 1px;
+    padding: 5px;
+}
+.days .dates{
+    text-align: left;
+    font-size: 0.7rem;
+    padding-bottom: 30px;
+    border: 2px solid beige;
+}
+.dates:hover{
+    border: 2px solid var(--red);
+    transition: 0.3s;
+    cursor: pointer;
+}
+form{
+    background-color: burlywood;
+    border-radius: 5px;
+    margin: 10px 0px 20px 0px;
+    padding: 15px;
+    text-align: left;
+}
+input{
+    width: 20%;
+    margin-right: 15px;
+}
+input[type=submit]{
+    margin-left: 30px;
+}
+
+
+.right-block{
+    display: block;
+    margin-top: 30px;
+    background-color: beige;
+    border-radius: 5px;
+}
+.events > p{
+    text-align: left;
+    padding: 0px 20px;
+}
+
+
+@media only screen and (min-width: 1000px) {
+    .left-block{
+        display: inline-block;
+        width: 49%;
+        position: absolute;
+        top: 10px;
+        left: 5%;
+    }
+    .fa-caret-left{
+        left: 25%;
+    }
+    .fa-caret-right{
+        right: 25%;
+    }
+    .right-block{
+        display: inline-block;
+        width: 39%;
+        background-color: beige;
+        position: absolute;
+        top: 10px;
+        right: 5%;
+    }
+    .fa-solid{
+        position: absolute;
+        top: 20px;
+    }
+    input[type=submit]{
+        position: absolute;
+        right: 20px;
+    }
+  }
+
+
