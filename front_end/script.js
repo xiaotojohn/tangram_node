@@ -1,8 +1,5 @@
 //TO-DO LIST:
 // keyboard events if possible?
-// go to certain date?
-// make selected dates red outlined
-// make a certain page printable
 
 
 let months_eng = ["Janurary", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -10,21 +7,17 @@ let days_eng = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
 const date = new Date()
 let info = {
     "today": [date.getFullYear(), date.getMonth(), date.getDate(), date.getDay()], // [YYYY, MM - 1, DD, WWW - 1]
-    "prev_chosen": "",
+    "prev_chosen": date.getFullYear() + "/" + (date.getMonth() + 1)  + "/" + date.getDate(),
     "year": date.getFullYear(),
     "month": date.getMonth(),
-    "date": date.getDate()
+    "date": date.getDate(),
+    "username": "hello",
+    "password": "idk",
 }
 
-
-window.onload = function(){
-    let download = document.getElementById('download')
-    download.addEventListener('click', function(){downloadTXT(document.querySelector(".right-block").innerText, "Schedule for " + info.month + "-" + info.date + "-" + info.year)})
-    document.querySelector(".date").innerHTML = months_eng[info.month] + " " + info.year 
-    document.querySelector(".days").innerHTML = document.querySelector(".days").innerHTML = "<div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>" + buildCalendar(info.year, info.month)
-    displayDateOnRight()
-}
-
+// return an html string that contains all calendar info for given year and month
+// each cell contains the changeDateInfo function
+// each cell has id of yyyy/mm/dd
 function buildCalendar(y, m){
     let mystring = ""
 
@@ -47,14 +40,15 @@ function buildCalendar(y, m){
     }
     for(let i = 0; i < numDays(y, m+1); i++){
         if ((i + 1) == info.today[2] && info.month == info.today[1] && info.year == info.today[0]){
-            mystring += "<div class = 'dates' style = 'border: 2px solid var(--red); background-color: burlywood;' onclick = 'changeDateInfo(this.innerHTML)'>" + (i + 1) + "</div>"
+            mystring += "<div class = 'dates' style = 'border: 2px solid var(--red); background-color: var(--light);' id =" + y + "/" + (m+1) + "/" + (i+1) + " onclick = 'changeDateInfo(this.innerHTML)'>" + (i + 1) + "</div>"
         } else {
-            mystring += "<div class = 'dates' onclick = 'changeDateInfo(this.innerHTML)'>" + (i + 1) + "</div>"
+            mystring += "<div class = 'dates' id =" + y + "/" + (m+1) + "/" + (i+1) + " onclick = 'changeDateInfo(this.innerHTML)'>" + (i + 1) + "</div>"
         }
     }
     return mystring
 }
 
+// when a left/right button is pressed, change the month
 function changeMonth(n){ // n is either +1 or -1 depending on which arrow was clicked
     if(n > 0){ // increase month
         if(info.month == 11){
@@ -73,44 +67,127 @@ function changeMonth(n){ // n is either +1 or -1 depending on which arrow was cl
     }
     document.querySelector(".date").innerHTML = months_eng[info.month] + " " + info.year
     document.querySelector(".days").innerHTML = "<div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>" + buildCalendar(info.year, info.month)
+    info.date = 1
+    info.prev_chosen = info.year + "/" + (info.month + 1) + "/" + info.date
+    document.getElementById(info.prev_chosen).style.border = "2px solid var(--red)"
+    displayDateOnRight()
 }
 
+// changes the date when user clicks on the calendar
 function changeDateInfo(d){
     info.date = d
     displayDateOnRight()
-    // change current element to have red outline
-
     // restore previous element to NOT have red outline
+    if (info.prev_chosen != ""){
+        if (info.prev_chosen == info.today[0] + "/" + (info.today[1] + 1) + "/" + info.today[2]){
+            document.getElementById(info.prev_chosen).style.border = "2px solid var(--light)"
+        }else {
+            document.getElementById(info.prev_chosen).style.border = "2px solid var(--yellow)"
+        }
+    }
+    // change current element to have red outline
+    document.getElementById(info.year + "/" + (info.month + 1) + "/" + d).style.border = "2px solid var(--red)"
+    info.prev_chosen = info.year + "/" + (info.month + 1) + "/" + d
 }
 
+// displays the clicked date on the right div
 function displayDateOnRight(){
     document.querySelector("#date").innerHTML = "<h1>" + (info.month + 1) + "/" + info.date + "/" + info.year + "</h1>"
 }
 
-function downloadJSON(data, filename){
-    console.log(data)
-    // Convert the JSON data to a string
-    var json = JSON.stringify(data);
+function downloadPNG(){
+    const screenshotTarget = document.querySelector(".right-block");
+    html2canvas(screenshotTarget).then((canvas) => {
+        let a = document.createElement("a")
+        a.download = (info.month + 1) + "/" + info.date + "/" + info.year + ".png"
+        a.href=canvas.toDataURL("image/png")
+        a.click()
+    })
+}
 
-    // Create a new Blob object with the JSON data and set its type
-    var blob = new Blob([json], { type: 'application/json' });
 
-    // Create a temporary URL for the file
-    var url = URL.createObjectURL(blob);
+function openLink(link){
+    window.open("https://" + link, "_blank")
+}
 
-    // Create a new link element with the download attribute set to the desired filename
-    var link = document.createElement('a');
-    link.setAttribute('download', filename);
+function copyThis(thing, type){
+    console.log(thing)
+    navigator.clipboard.writeText(thing)
+    alert("Copied " + type + " to clipboard!")
+}
 
-    // Set the link's href attribute to the temporary URL
-    link.href = url;
 
-    // Simulate a click on the link to trigger the download
-    document.body.appendChild(link);
-    link.click();
 
-    // Clean up the temporary URL and link element
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+// searchs the day that's in the input box
+function searchDate(){
+    y = document.querySelector("#Y").value
+    m = document.querySelector("#M").value - 1
+    if((y <= 2000 || y > 2500) || (m <= -1 || m >= 12)){
+        alert("Date unavailble")
+        document.querySelector("#Y").value = ""
+        document.querySelector("#M").value = ""
+    } else{
+        info.year = y
+        info.month = m
+        info.date = 1
+        document.querySelector(".date").innerHTML = months_eng[info.month] + " " + info.year 
+        document.querySelector(".days").innerHTML = document.querySelector(".days").innerHTML = "<div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>" + buildCalendar(info.year, info.month)
+        displayDateOnRight()
+        document.querySelector("#Y").value = ""
+        document.querySelector("#M").value = ""
+    }
 
 }
+
+// returns a list of T/F based on if classes were checked
+function UpdateRecords(){
+    numClasses = document.getElementById("events").children.length
+    for (i = 0; i < numClasses; i++){
+        console.log(document.getElementById(i).checked)
+    }
+    alert("Records Updated Sucessfully")
+}
+
+function check(elem){
+    if (document.getElementById("events").children[elem.id].style.backgroundColor != "var(--red)"){
+        document.getElementById("events").children[elem.id].style.backgroundColor = "var(--red)"
+    } else {
+        document.getElementById("events").children[elem.id].style.backgroundColor = "var(--yellow)"
+    }
+}
+
+// *********************************************************************************************************
+// *********************************************************************************************************
+// *********************************************************************************************************
+// *********************************************************************************************************
+// *********************************************************************************************************
+
+
+// Functions for index.html
+
+//shows the sign in light box
+function showlightbox(){
+    document.querySelector(".lightbox").style.display = "block"
+    document.querySelector("#overlay").style.display = "block"
+}
+
+// hides the sign in light box
+function hidelightbox(){
+    document.querySelector(".lightbox").style.display = "none"
+    document.querySelector("#overlay").style.display = "none"
+    document.querySelector("#username").value = ""
+    document.querySelector("#password").value = ""
+}
+
+// gets sign in information
+function signIn(){
+    username = document.querySelector("#username").value
+    password = document.querySelector("#password").value
+    if(username == info.username && password == info.password){
+        console.log("hooray")
+    } else{
+        console.log("ohno")
+    }
+    hidelightbox()
+}
+
