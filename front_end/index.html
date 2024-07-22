@@ -1,91 +1,280 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="favicon.png">
-        <link rel="stylesheet" href="style.css">  
-        <script src="script.js"></script>
-        <script src="https://kit.fontawesome.com/0f2132a6f3.js" crossorigin="anonymous"></script>
-        <title>Tangram</title>
-    </head>
-  
-    <body>
-        <div class="container">
-            <div class="left-block">
-                <div class="calendar">
-                    <div class="month">
-                        <h1>
-                        <i class="fa-solid fa-caret-left" onclick="changeMonth(-1)"></i>
-                        <span class="date"></span>
-                        <i class="fa-solid fa-caret-right" onclick="changeMonth(1)"></i>
-                        </h1>
-                    </div>
-                    <div class="days"></div>
-                    <form>
-                        <label for="Y">Y:</label>
-                        <input type="text" id="Y" name="Y" placeholder="YYYY" maxlength="4"> 
-                        <label for="M">M:</label>
-                        <input type="text" id="M" name="M" placeholder="MM" maxlength="2">
-                        <input type="submit" value="Go" onclick="sth()">
-                    </form>
-                    <button class="btn" id="download">Download This Day</button>
-                </div>
+<html lang="en">
+<head>
+    <title>Tangram - Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/0f2132a6f3.js" crossorigin="anonymous"></script>
+    <script>
+        window.onload = function(){
+            hidelightbox()
+        }
+    </script>
+    <script src="script.js"></script>
+    <!-- Styles -->
+    <style>
+        :root{
+            --black: rgb(0, 0, 0);
+            --dark: #580E04;
+            --red: #A62418;
+            --yellow: #E6B553;
+            --lighter: rgb(242, 241, 238);
+        }
+        * {
+            box-sizing: border-box;
+            font: 15px Futura, sans-serif;
+        }
+
+        body {
+            margin: 0;
+        }
+        #overlay{
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            opacity: 0.8;
+            position: fixed;
+            display: none;
+        }
+        h1{
+            font-size: 5rem;
+            font-weight: bold;
+            margin: 10px 0px;
+        }
+        h2{
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        h3{
+            font-weight: bold;
+        }
+        button{
+            background: transparent;
+            border: 2px solid black;
+            border-radius: 5px;
+            margin: 10px 30px;
+            padding: 3px 20px;
+        }
+        button:hover{
+            background-color: rgba(0, 0, 255, 0.5);
+            color: white;
+            transition: 0.5s;
+        }
+        /* Style the top navigation bar */
+        .topnav {
+            overflow: hidden;
+            background-color: var(--dark);
+        }
+
+        /* Style the lightbox */
+        .lightbox{
+            display: block;
+            position: fixed;
+            top: calc(150px + 10vh);
+            left: calc((100vw - 445px)/2);
+            background-color: white;
+            border-radius: 5px;
+            padding: 50px;
+        }
+        .lightbox > form > button{
+            margin: 0px;
+        }
+
+        /* Style the topnav links */
+        .topnav a {
+            float: right;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change color on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+            transition: 0.5s;
+        }
+
+        /* Style the content */
+        .content {
+            background-color: var(--lighter);
+            text-align: center;
+        }
+        .hero{
+            position: absolute;
+            top: 300px;
+            left: calc((100vw - 639px)/2);
+        }
+        .hero > p{
+            margin: 5px;
+        }
+
+        .info{
+            background-color: var(--lighter);
+            display: grid;
+            grid: auto / 1fr;
+            padding: 15px 8%;
+        }
+        .info > div{
+            padding: 15px;
+        }
+        .hours{
+            display: inline-block;
+        }
+
+        /* Style the footer */
+        .footer {
+            background-color: var(--dark);
+            color: var(--lighter);
+            padding: 15px calc(15px + 8%);
+            display: grid;
+            grid: auto / 1fr;
+        }
+
+        #copyright{
+            text-align: center;
+        }
+        
+        @media only screen and (min-width: 750px) {
+            *{
+                font: 20px Futura, sans-serif;
+            }
+            .hero{
+                left: calc(50vw - 355.6px);
+            }
+            .info{
+                display: grid;
+                grid: auto / 2fr 3fr;
+                padding: 0px 8%;
+            }
+
+            .info > div{
+                padding: 15px;
+            }
+
+            /* Style the footer */
+            .footer {
+                padding: 15px 8%;
+                display: grid;
+                grid: 250px auto/ 1fr 1fr 1fr;
+            }
+            .footer > div > p:hover{
+                text-decoration: underline;
+            }
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div id="overlay"></div>
+    <div class="topnav">
+        <a onclick="showlightbox()"><i class="fa-solid fa-user"></i></a>
+        <a href="w-schedule.html">Weekly Schedule</a>
+        <a href="d-schedule.html">Daily Schedule</a>
+    </div>
+
+    <div class="content">
+        <img src="images/placeholder.png" alt="tangramculture" width=100% height=700px>
+        <div class="hero">
+            <h1> 唐韵文化</h1>
+            <p>Tangram Culture: A place for Chinese learning and cool stuff like that</p>
+            <button type="button">thing 1</button>
+            <button type="button">thing 2</button>
+        </div>
+    </div>
+
+    <div class="lightbox">
+        <form class="sign-in">
+            <h2>Sign in to Tangram Culture</h2>
+            <label for="username">Username</label> <br>
+            <input type="text" id="username" name="username" autocomplete="username"> <br>
+            <label for="password">Password</label> <br>
+            <input type="password" id="password" name="password" autocomplete="off"> <br><br>
+            <button type="button" onclick="signIn()">Sign In</button>
+            <button type="button" onclick="hidelightbox()">Cancel</button>
+            <p>
+                No account yet? <a href="#">Sign Up Here</a>
+            </p>
+        </form>
+    </div>
+
+    <div class="info">
+        <div class="left_side">
+            <h2>
+                Bussiness Hours
+            </h2>
+            <div class="hours">
+                Monday<br>
+                Tuesday<br>
+                Wednesday<br>
+                Thursday<br>
+                Friday<br>
+                Saturday<br>
+                Sunday<br><br>
             </div>
-            <div class="right-block">
-                <div id = "date">
-                    <h1>
-                        Date
-                    </h1>
-                </div>
-                <div class="events">
-                    <p>
-                        3:00-4:00<br>
-                        Tangram teachers<br>
-                        some student guy
-                    </p>
-                    <p>
-                        3:00-4:00<br>
-                        Tangram teachers<br>
-                        some student guy
-                    </p>
-                    <p>
-                        3:00-4:00<br>
-                        Tangram teachers<br>
-                        some student guy
-                    </p>
-                    <p>
-                        3:00-4:00<br>
-                        Tangram teachers<br>
-                        some student guy
-                    </p>
-                    <p>
-                        3:00-4:00<br>
-                        Tangram teachers<br>
-                        some student guy
-                    </p>
-                    <p>
-                        3:00-4:00<br>
-                        Tangram teachers<br>
-                        some student guy
-                    </p>
-                    <p>
-                        3:00-4:00<br>
-                        Tangram teachers<br>
-                        some student guy
-                    </p>
-                    <p>
-                        3:00-4:00<br>
-                        Tangram teachers<br>
-                        some student guy
-                    </p>
-                    <p>
-                        3:00-4:00<br>
-                        Tangram teachers<br>
-                        some student guy
-                    </p>
-                </div>
+            <div class="hours">
+                3:30PM - 7:00PM<br>
+                3:30PM - 7:00PM<br>
+                3:30PM - 7:00PM<br>
+                3:30PM - 7:00PM<br>
+                3:30PM - 7:00PM<br>
+                9:00AM - 5:00PM<br>
+                9:00AM - 5:00PM<br><br>
             </div>
         </div>
-    </body>
+        <div class="right_side">
+            <h2>
+                Explore stuff
+            </h2>
+            <p>
+                Teachers and Course offerings
+                log in and schedule a class
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div>
+            <h3>
+                Address
+            </h3>
+            <p onclick="openLink('maps.app.goo.gl/2LGkDyypqragEnUG7')"><i class="fa-solid fa-location-dot"></i> 206-3994 Shelbourne St. <br> Victoria, BC (V8N 3E2)</p>
+        </div>
+        <div>
+            <h3>
+                Contact
+            </h3>
+            <p onclick="copyThis(this.innerText, 'phone number')">
+                <i class="fa-solid fa-phone"></i> 250-885-6090
+            </p>
+            <p onclick="copyThis(this.innerText, 'email')">
+                <i class="fa-solid fa-envelope"></i> Tangram.culture@gmail.com
+            </p>
+        </div>
+        <div>
+            <h3>
+                Sign up
+            </h3>
+            <p>
+                idk how to do this part yet
+                <br><br>
+            </p>
+        </div>
+        <div>
+
+        </div>
+        <div id="copyright">
+            Copyright &copy; 2024
+        </div>
+    </div>
+
+
+
+</body>
 </html>
