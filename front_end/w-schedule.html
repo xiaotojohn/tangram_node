@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="images/favicon.png">
+        <style>
+            :root{
+                --black: rgb(0, 0, 0);
+                --dark: #580E04;
+                --red: #A62418;
+                --yellow: #E6B553;
+                --light: #c5ab8a;
+                --lighter: #fdf5ec;
+            }
+            *{
+                color: var(--dark);
+                text-align: center;
+                font: 20px Futura, sans-serif;
+            }
+            body{
+                background-color: var(--lighter);
+                margin: 0px 5% 0px 5%;
+            }
+        </style>
+        <script src="script.js"></script>
+        <script src="https://kit.fontawesome.com/0f2132a6f3.js" crossorigin="anonymous"></script>
+        <script>
+            window.onload = function(){
+                let date = new Date()
+                // solve the Sunday = 0 issue
+                console.log(date.getDate() - date.getDay() + 1)
+            }
+        </script>
+        <title>Tangram - Weekly Scheduling</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="top-block">
+                <div class="weekday-titles">
+                    <div class="mon">Mon</div>
+                    <div class="tue">Tue</div>
+                    <div class="wed">Wed</div>
+                    <div class="thu">Thu</div>
+                    <div class="fri">Fri</div>
+                    <div class="sat">Sat</div>
+                    <div class="sun">Sun</div>
+                </div>
+                <div class="weekdays">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="bottom-block">
+
+            </div>
+            <button class="btn" id="back"><a href="index.html">Back to home</a></button>
+            <button class="btn" id="back"><a href="d-schedule.html">Daily Schedule</a></button>
+        </div>
+    </body>
+</html>
