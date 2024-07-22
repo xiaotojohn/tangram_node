@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="images/favicon.png">
+        <!-- link to all js functions -->
+        <script src="script.js"></script>
+        <!-- screenshot stuff -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- onload functions -->
+        <script>
+            window.onload = function(){
+                document.querySelector(".date").innerHTML = months_eng[info.month] + " " + info.year 
+                document.querySelector(".days").innerHTML = document.querySelector(".days").innerHTML = "<div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>" + buildCalendar(info.year, info.month)
+                displayDateOnRight()
+            }
+        </script>
+        <style>
+            :root{
+                --black: rgb(0, 0, 0);
+                --dark: #580E04;
+                --red: #A62418;
+                --yellow: #E6B553;
+                --light: #c5ab8a;
+                --lighter: #fdf5ec;
+            }
+            *{
+                color: var(--dark);
+                text-align: center;
+                font: 20px Futura, sans-serif;
+            }
+            body{
+                background-color: var(--lighter);
+                margin: 0px 5% 30px 5%;
+            }
+            button{
+                margin: 0px 15px 15px 15px;
+            }
+            h1,span{
+                color: var(--black);
+                font: 20px Garamond, serif;
+                letter-spacing: 0.1rem;
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+            .container{
+                display: block;
+            }
+
+            .calendar{
+                display: grid;
+            }
+            .left-block{
+                display: block;
+                margin-top: 30px;
+            }
+            .month{
+                background-color: var(--red);
+                display: inline-block;
+                border-radius: 5px 5px 0px 0px;
+            }
+            .fa-solid:hover{
+                color: var(--lighter);
+                cursor: pointer;
+                transition: 0.3s;
+            }
+            .fa-caret-left{
+                font-size: 1.4rem;
+                position: absolute;
+                top: 50px;
+                left: 20%;
+            }
+            .fa-caret-right{
+                font-size: 1.4rem;
+                position: absolute;
+                top: 50px;
+                right: 20%;
+            }
+            .days{
+                background-color: var(--yellow);
+                display: grid;
+                grid: auto / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+                border-radius: 0px 0px 5px 5px;
+            }
+            .days > div{
+                margin: 1px;
+                padding: 5px;
+            }
+            .days .dates{
+                text-align: left;
+                font-size: 0.7rem;
+                padding-bottom: 30px;
+                border: 2px solid var(--yellow);
+            }
+            .dates:hover{
+                border: 2px solid var(--red);
+                transition: 0.3s;
+                cursor: pointer;
+            }
+            form{
+                background-color: var(--red);
+                border-radius: 5px;
+                margin: 10px 0px 20px 0px;
+                padding: 15px;
+                text-align: center;
+            }
+            input#Y,#M{
+                width: 20%;
+                margin-right: 15px;
+            }
+            form > button{
+                margin-right: 10%;
+            }
+
+            .right-block{
+                display: block;
+                margin-top: 30px;
+                padding: 15px; 
+                background-color: var(--yellow);
+                border-radius: 5px;
+            }
+            input[type=checkbox]{
+                height: 19px;
+                width: 20px;
+                accent-color: var(--dark);
+            }
+            .events > p{
+                text-align: left;
+                margin: 0px 20px 20px 20px;
+                padding: 15px;
+                border: 2px solid var(--red);
+                border-radius: 5px;
+            }
+            .footer {
+                background-color: #f1f1f1;
+                padding: 15px 8%;
+                display: grid;
+                grid: 300px / 1fr 1fr 1fr;
+            }
+
+
+            @media only screen and (min-width: 1000px) {
+                .left-block{
+                    display: inline-block;
+                    width: 49%;
+                    position: absolute;
+                    top: 10px;
+                    left: 5%;
+                }
+                .fa-caret-left{
+                    left: 25%;
+                }
+                .fa-caret-right{
+                    right: 25%;
+                }
+                .right-block{
+                    display: inline-block;
+                    width: 39%;
+                    position: absolute;
+                    top: 10px;
+                    right: 5%;
+                    padding: 0px;
+                }
+                .fa-solid{
+                    position: absolute;
+                    top: 20px;
+                }
+                input[type=submit]{
+                    position: absolute;
+                    right: 20px;
+                }
+            }
+        </style>
+        <script src="https://kit.fontawesome.com/0f2132a6f3.js" crossorigin="anonymous"></script>
+        <title>Tangram - Daily Scheduling</title>
+        
+    </head>
+  
+    <body>
+        <div class="container">
+            <div class="left-block">
+                <div class="calendar">
+                    <div class="month">
+                        <h1>
+                        <i class="fa-solid fa-caret-left" onclick="changeMonth(-1)"></i>
+                        <span class="date"></span>
+                        <i class="fa-solid fa-caret-right" onclick="changeMonth(1)"></i>
+                        </h1>
+                    </div>
+                    <div class="days"></div>
+                    <form>
+                        <label for="Y">Y:</label>
+                        <input type="text" id="Y" name="Y" placeholder="YYYY" maxlength="4" autocomplete="off"> 
+                        <label for="M">M:</label>
+                        <input type="text" id="M" name="M" placeholder="MM" maxlength="2" autocomplete="off">
+                        <button type="button" onclick="searchDate()">Go</button>
+                    </form>
+                    <button class="btn" id="download" onclick='downloadPNG()'>Download This Day</button>
+                    <button class="btn" id="back"><a href="index.html">Back to home</a></button>
+                    <button class="btn" id="back"><a href="w-schedule.html">Weekly Schedule</a></button>
+                </div>
+            </div>
+            <div class="right-block">
+                <div id = "date">
+                    <h1>
+                        Date
+                    </h1>
+                </div>
+                <div class="events" id="events">
+                    <p>
+                        3:00-4:00
+                        <input type="checkbox" class="checkbox hideable" id="0" onclick="check(this)">
+                        <br>
+                        Tangram teachers<br>
+                        some student guy
+                    </p>
+                    <p>
+                        5:00-6:00
+                        <input type="checkbox" class="checkbox hideable" id="1" onclick="check(this)">
+                        <br>
+                        Tangram teachers<br>
+                        some student guy
+                    </p>
+                </div>
+                <button type="button" class="hideable" onclick="UpdateRecords(this)">Update Records</button>
+            </div>
+        </div>
+    </body>
+</html>
