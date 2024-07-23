@@ -1,3 +1,0 @@
-exports.sanity_check = function () {
-    return 'welcome to the world at '+ Date();
-  };

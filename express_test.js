@@ -13,28 +13,28 @@ app.use(function(req, res, next) {
 
 app.get(['/','/index.html'], function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(fs.readFileSync('front_end/index.html'));
+    res.write(fs.readFileSync('public/index.html'));
     res.end();
     console.log('index.html requested');
 });
 
 app.get('/style.css', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/css'});
-    res.write(fs.readFileSync('front_end/style.css'));
+    res.write(fs.readFileSync('public/style.css'));
     res.end();
     console.log('style.css requested');
 });
 
 app.get('/script.js', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/javascript'});
-    res.write(fs.readFileSync('front_end/script.js'));
+    res.write(fs.readFileSync('public/script.js'));
     res.end();
     console.log('script.js requested');
 });
 
 app.get('/d-schedule.html', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(fs.readFileSync('front_end/d-schedule.html'));
+    res.write(fs.readFileSync('public/d-schedule.html'));
     res.end();
     console.log('d-schedule.html requested');
 });
@@ -42,7 +42,7 @@ app.get('/d-schedule.html', function(req, res) {
 app.get('/w-schedule.html', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(
-        fs.readFileSync('front_end/w-schedule.html'), 'utf-8', function(err, data) {
+        fs.readFileSync('public/w-schedule.html'), 'utf-8', function(err, data) {
             if (err) {
                 console.log('error reading w-schedule.html');
                 return;
@@ -56,7 +56,7 @@ app.get('/w-schedule.html', function(req, res) {
 app.get('/images/favicon.png', function(req, res) {
     console.log('yes it is triggered!!!!!!!!');
     res.writeHead(200, {'Content-Type': 'image/png'});
-    res.write(fs.readFileSync('front_end/images/favicon.png'));
+    res.write(fs.readFileSync('public/images/favicon.png'));
     res.end();
     // console.log('favicon.png requested');
 });
@@ -71,7 +71,7 @@ app.get('/images/favicon.png', function(req, res) {
 
 app.get('/images/placeholder.png', function(req, res) {
     res.writeHead(200, {'Content-Type': 'image/png'});
-    res.write(fs.readFileSync('front_end/images/placeholder.png'));
+    res.write(fs.readFileSync('public/images/placeholder.png'));
     res.end();
     console.log('placeholder.png requested');
 });
@@ -84,28 +84,28 @@ app.get('/images/placeholder.png', function(req, res) {
 //     switch (path) {
 //         case '/':
 //             contentType = 'text/html';
-//             filePath = 'front_end/index.html';
+//             filePath = 'public/index.html';
 //             break;
 //         case '/style.css':
 //             contentType = 'text/css';
-//             filePath = 'front_end/style.css';
+//             filePath = 'public/style.css';
 //             break;
 //         case '/script.js':
 //             contentType = 'text/javascript';
-//             filePath = 'front_end/script.js';
+//             filePath = 'public/script.js';
 //             break;
 //         case '/d-schedule.html':
 //             contentType = 'text/html';
-//             filePath = 'front_end/d-schedule.html';
+//             filePath = 'public/d-schedule.html';
 //             break;
 //         case '/w-schedule.html':
 //             contentType = 'text/html';
-//             filePath = 'front_end/w-schedule.html';
+//             filePath = 'public/w-schedule.html';
 //             break;
 //         case '/':
 //         default:
 //             contentType = 'text/plain';
-//             filePath = 'front_end/not-found.html';
+//             filePath = 'public/not-found.html';
 //             break;
 //     }
 //     // print the path of the request
