@@ -1,5 +1,5 @@
 //TO-DO LIST:
-// keyboard events if possible?
+// keyboard events if possible
 
 
 let months_eng = ["Janurary", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -171,6 +171,19 @@ function showlightbox(){
     document.querySelector("#overlay").style.display = "block"
 }
 
+// function showlightbox_signin(response){
+//     console.log('yes we are here')
+//     if (response.response == "success"){
+//         hidelightbox()
+//         document.querySelector(".lightbox_signin").style.display = "block"
+//         document.querySelector("#overlay").style.display = "block"
+//     }
+//     else{
+//         console.log(response)
+//         alert("Incorrect Username or Password")
+//     }
+// }
+
 // hides the sign in light box
 function hidelightbox(){
     document.querySelector(".lightbox").style.display = "none"
@@ -183,6 +196,25 @@ function hidelightbox(){
 function signIn(){
     username = document.querySelector("#username").value
     password = document.querySelector("#password").value
+    // // send to server
+    // url = "http://localhost:8080/signin"
+    // feedback = fetch(url, {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //         username: username,
+    //         password: password
+    //     })
+    
+    // })
+    // console.log(feedback.JSON())
+
+
+
+
+
     if(username == info.username && password == info.password){
         console.log("hooray")
     } else{
