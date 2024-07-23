@@ -27,31 +27,38 @@ app.get('/style.css', function(req, res) {
 
 app.get('/script.js', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/javascript'});
-    res.write(fs.readFile('front_end/script.js'));
+    res.write(fs.readFileSync('front_end/script.js'));
     res.end();
     console.log('script.js requested');
 });
 
 app.get('/d-schedule.html', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(fs.readFile('front_end/d-schedule.html'));
+    res.write(fs.readFileSync('front_end/d-schedule.html'));
     res.end();
     console.log('d-schedule.html requested');
 });
 
 app.get('/w-schedule.html', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(fs.readFile('front_end/w-schedule.html'));
+    res.write(
+        fs.readFileSync('front_end/w-schedule.html'), 'utf-8', function(err, data) {
+            if (err) {
+                console.log('error reading w-schedule.html');
+                return;
+            }
+            console.log('w-schedule.html requested');
+        }
+    );
     res.end();
-    console.log('w-schedule.html requested');
 });
 
-app.get('/favicon.png', function(req, res) {
+app.get('/images/favicon.png', function(req, res) {
     console.log('yes it is triggered!!!!!!!!');
     res.writeHead(200, {'Content-Type': 'image/png'});
-    res.write(fs.readFile('front_end/images/favicon.png'));
+    res.write(fs.readFileSync('front_end/images/favicon.png'));
     res.end();
-    console.log('favicon.png requested');
+    // console.log('favicon.png requested');
 });
 
 // notes: yes the app.get method might not be the best way to handle the static files.
@@ -64,7 +71,7 @@ app.get('/favicon.png', function(req, res) {
 
 app.get('/images/placeholder.png', function(req, res) {
     res.writeHead(200, {'Content-Type': 'image/png'});
-    res.write(fs.readFile('front_end/images/placeholder.png'));
+    res.write(fs.readFileSync('front_end/images/placeholder.png'));
     res.end();
     console.log('placeholder.png requested');
 });
