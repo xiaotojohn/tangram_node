@@ -1,0 +1,19 @@
+<html>
+  <body>
+    <h1>
+        <%= title %>
+    </h1>
+    <h2>
+        <%= userInfo.username %>! YOU SHALL NOT PASS! (unless your password is <%= userInfo.password %>)
+    </h2>
+    <hr/>
+    <h2>
+      Meh, you can try to login as a student if you want.
+    </h2>
+    <form action = '/student/login' method="post">
+        <input type="text" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+        <button type="submit">login</button>
+    </form>
+  </body>
+</html>

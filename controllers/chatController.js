@@ -1,5 +1,6 @@
-const express = require('express');
-const chatBoard = express.Router();
+// const express = require('express');
+const asyncHandler = require('express-async-handler');
+
 
 const messages = [
     {
@@ -14,16 +15,16 @@ const messages = [
     }
   ];
 
-chatBoard.use(express.urlencoded({extended: true}));
 
-chatBoard.get('/', (req, res) => {
+
+const getChatBoardViews = asyncHandler(async (req, res) => {
     res.render('chatBoard/chatBoard', {
         title: 'Chat Board',
         messages: messages
     });
 });
 
-chatBoard.post('/newmsg',  (req, res) => {
+const postNewChat = asyncHandler(async (req, res) => {
     console.log(req.body);
     const newMessage = {
         text: req.body.text,
@@ -34,4 +35,6 @@ chatBoard.post('/newmsg',  (req, res) => {
     res.redirect('/chat');
 });
 
-module.exports = chatBoard;
+
+
+module.exports = { getChatBoardViews, postNewChat };

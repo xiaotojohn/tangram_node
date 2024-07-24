@@ -33,7 +33,7 @@ const sampleRouter = require('./routes/sampleRouter');
 const errorHandler = require('./routes/errorHandler');
 const studentRouter = require('./routes/studentRouter');
 const teacherRouter = require('./routes/teacherRouter');
-const chatBoard = require('./routes/chatBoard');
+const chatRouter = require('./routes/chatRouter');
 
 // application level middleware
 
@@ -59,10 +59,15 @@ app.use('/student', studentRouter);
 
 app.use('/teacher', teacherRouter);
 
-app.use('/chat', chatBoard);
+app.use('/chat', chatRouter);
 
 app.use('*',errorHandler);
 
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).send('Something went wrong...Back to the ' + '<a href=/sample>Sample</a> or '+ '<a href=/>Home Page</a>');
+  });
+  
 
 }
 

@@ -30,3 +30,18 @@ listening on port 8080
 ├─ package.json
 ├─ readme.md
 ```
+
+---
+
+### To do list
+- flowchart(business logic)
+- database
+- user authentication
+- cookies
+- deployment
+    - reverse proxy apache -> express
+    - docker
+- error handling
+    - dev_test.log
+    - winston
+

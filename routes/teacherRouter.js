@@ -1,8 +1,11 @@
 const express = require('express');
 const teacherRouter = express.Router();
+const tController = require('../controllers/teacherController.js');
 
-teacherRouter.get('/', (req, res) => {
-    res.send('teacher route accessed');
-});
+teacherRouter.use(express.urlencoded({extended: true}));
+
+teacherRouter.get('/',tController.getTeacherView);
+teacherRouter.post('/login',tController.postTeacherLogin);
+
 
 module.exports = teacherRouter;
