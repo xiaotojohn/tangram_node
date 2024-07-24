@@ -3,9 +3,16 @@ require("dotenv").config(); // load the environment variables
 
 const express = require('express');
 const app = express();
-var url = require('url');
-const fs = require('fs');
+// const fs = require('fs');
 const { error } = require("console");
+var path = require('path');
+
+// view engine
+
+app.set("views", path.join(__dirname, "views")); 
+// here we define the views directory
+// later every time we render a view, express will look in this directory
+app.set("view engine", "ejs"); // here we define the view engine
 
 // environment variables
 
@@ -24,15 +31,35 @@ console.log('server started');
 const indexRouter = require('./routes/indexRouter');
 const sampleRouter = require('./routes/sampleRouter');
 const errorHandler = require('./routes/errorHandler');
-// middleware
+const studentRouter = require('./routes/studentRouter');
+const teacherRouter = require('./routes/teacherRouter');
+const chatBoard = require('./routes/chatBoard');
+
+// application level middleware
+
+// log the request path
 app.use(function(req, res, next) {
     console.log('request path: ' + req.url);
     next();
 });
 
-app.use('/', indexRouter);
+// serve favicon, browser will request this file as a default
+app.get('/favicon.ico', (req,res) => {
+    // res.writeHead(200, {'Content-Type': 'image/png'});
+    res.sendFile(path.join(__dirname, 'public', 'images','favicon.png'));
+});
+
+// routes
+
+app.use(['/'], indexRouter);
 
 app.use('/sample', sampleRouter);
+
+app.use('/student', studentRouter);
+
+app.use('/teacher', teacherRouter);
+
+app.use('/chat', chatBoard);
 
 app.use('*',errorHandler);
 

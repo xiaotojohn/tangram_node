@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <link rel = 'stylesheet' href = './style.css'>
+    </head>
+    <body>
+        <h1>
+            <%= title %>
+        </h1>
+        <h2>
+            welcome! basically, this is a chat board.
+            Make America Great Again!
+        </h2>
+        <hr/>
+        <div>
+            <% for (let i = 0; i < messages.length; i++) { %>
+                <p><%= messages[i].text %></p>
+                <p>----- <%= messages[i].user %></p> 
+                <p>on <%= messages[i].added %></p>
+                <hr/>
+            <% } %>
+        <div>
+        <form action="/chat/newmsg" method="post">
+            <input type="text" name="user" placeholder="user">
+            <input type="text" name="text" placeholder="message">
+            <button type="submit">send</button>
+    </body>
