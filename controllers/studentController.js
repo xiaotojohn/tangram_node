@@ -1,5 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const viewpath = 'userViews';
+const query = require('../db/querys.js');
+const { all } = require('../routes/indexRouter.js');
 
 var tempStudent = {
     username: 'Deamon',
@@ -24,5 +26,25 @@ const postStudentLogin = asyncHandler(
         res.redirect('/student');
 });
 
+const getStudentRegister = asyncHandler(
+    async (req, res) => {
+        allStudents = await query.getAllStudents();
+        res.render('userViews/sregister', {
+            title: 'Student Register Test Page',
+            userInfo: allStudents
+        });
+});
 
-module.exports = { getStudentView, postStudentLogin };
+const postStudentRegister = asyncHandler(
+    async (req, res) => {
+        console.log(req.body);
+        tempStudent = {
+            username: req.body.username,
+            password: req.body.password
+        };
+        await query.createNewStudent(tempStudent.username, tempStudent.password);
+        res.redirect('/student/register');
+});
+
+
+module.exports = { getStudentView, postStudentLogin, getStudentRegister, postStudentRegister };

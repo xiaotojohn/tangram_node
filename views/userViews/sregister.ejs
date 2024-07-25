@@ -1,0 +1,34 @@
+<html>
+  <body>
+    <h1>
+        <%= title %>
+    </h1>
+    <h2>
+        This page is connected to the database. Once you register, your information will be stored in the database.
+        And a success message will be displayed, along with your username and password.
+        Beaware, your password will be stored in plain text, as this is just a demo.
+    </h2>
+    <hr/>
+    <form action = '/student/register' method="post">
+        <input type="text" name="username" placeholder="username">
+        <input type="text" name="password" placeholder="password"> 
+        <button type="submit">login</button>
+    </form>
+    <hr/>
+    <h2>
+        This is all student information stored in the database.
+    </h2>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+        </tr>
+        <% for (let i = 0; i < userInfo.length; i++) { %>
+            <tr>
+                <td><%= userInfo[i].username %></td>
+                <td><%= userInfo[i].password %></td>
+            </tr>
+        <% } %>
+    </table>
+  </body>
+</html>

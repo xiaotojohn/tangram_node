@@ -6,6 +6,7 @@ Contributors:
 ## How to Set it up?
 - `node.js`&`nvm`&`npm`: follow this [link](https://nodejs.org/en/download/package-manager). Choose `V20.xx.x(LTS)` on `mac OS` using `nvm`
 - Find the [package json file](package.json), which contains all dependencies. **Enter your project directory in terminal**, then use ```npm install [package_name]``` to install the packages listed.
+- Luckily, we deployed our databased online, so you dont have to bother set it up.
 - Run `node express-test.js` and you shall see the following message: 
 
 ```
@@ -19,6 +20,7 @@ listening on port 8080
 ```
 .
 ├── controllers/
+├── db/
 ├── node_modules/
 ├── public/
 ├── routes/
@@ -37,6 +39,7 @@ listening on port 8080
 - flowchart(business logic)
 - database
 - user authentication
+    - error handler for views
 - cookies
 - deployment
     - reverse proxy apache -> express
@@ -44,4 +47,11 @@ listening on port 8080
 - error handling
     - dev_test.log
     - winston
-
+- adminpage
+    - internal control over databases
+    - teachers cannot register themselves, only be inserted by the admin
+    - tbh, students shall not register themselves as well, an account shall be assigned. but we will talk about this.
+- more queries
+    - getAllstudents not returning id
+- chatboard
+    - refactor db, currently no id

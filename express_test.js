@@ -2,6 +2,7 @@
 require("dotenv").config(); // load the environment variables
 
 const express = require('express');
+const {Pool} = require('pg');
 const app = express();
 // const fs = require('fs');
 const { error } = require("console");
@@ -16,14 +17,19 @@ app.set("view engine", "ejs"); // here we define the view engine
 
 // environment variables
 
-
 const MODE = process.env.MODE
 
 /////////////////////// DEV MODE ///////////////////////
+
 if (MODE === 'dev') {
 
-// constants for dev mode
+
+// env constants for dev mode
 const PORT = process.env.PORT;
+
+
+
+// console info
 app.listen(PORT,() => console.log('now listening on port ' + PORT));
 console.log('server started');
 
@@ -35,7 +41,7 @@ const studentRouter = require('./routes/studentRouter');
 const teacherRouter = require('./routes/teacherRouter');
 const chatRouter = require('./routes/chatRouter');
 
-// application level middleware
+// APP LEVEL MIDDLEWARE //
 
 // log the request path
 app.use(function(req, res, next) {
@@ -49,7 +55,7 @@ app.get('/favicon.ico', (req,res) => {
     res.sendFile(path.join(__dirname, 'public', 'images','favicon.png'));
 });
 
-// routes
+// ROUTES //
 
 app.use(['/'], indexRouter);
 
@@ -61,8 +67,12 @@ app.use('/teacher', teacherRouter);
 
 app.use('/chat', chatRouter);
 
+// ERROR HANDLING //
+
+// non-existing routes
 app.use('*',errorHandler);
 
+// error handling
 app.use((err, req, res, next) => {
     console.error(err);
     res.status(500).send('Something went wrong...Back to the ' + '<a href=/sample>Sample</a> or '+ '<a href=/>Home Page</a>');
@@ -71,9 +81,11 @@ app.use((err, req, res, next) => {
 
 }
 
-//----------------------end of dev mode----------------------//
+/////////////////////// END DEV MODE //////////////////////
 
-/////////////////////// PROD MODE ///////////////////////
+
+
+/////////////////////// PROD MODE /////////////////////////
 else{
 
 }

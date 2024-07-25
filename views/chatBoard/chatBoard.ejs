@@ -13,9 +13,9 @@
         <hr/>
         <div>
             <% for (let i = 0; i < messages.length; i++) { %>
-                <p><%= messages[i].text %></p>
-                <p>----- <%= messages[i].user %></p> 
-                <p>on <%= messages[i].added %></p>
+                <p><%= messages[i].msg %></p>
+                <p>----- <%= messages[i].name %></p> 
+                <p>on <%= messages[i].timestamp %></p>
                 <hr/>
             <% } %>
         <div>

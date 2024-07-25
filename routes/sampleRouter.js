@@ -7,7 +7,7 @@ const links = [
     {name: 'Student', url: '/student'},
     {name: 'Sample', url: '/sample'},
     {name: 'ChatBoard', url: '/chat'},
-];
+]; // links for the navbar, all pages available is here
 
 sampleRouter.get('/', (req, res) => {
     res.render('sample/sample', {
@@ -15,6 +15,6 @@ sampleRouter.get('/', (req, res) => {
         message: 'This is a sample page',
         links: links
     });
-});
+}); // sample serves as an index page
 
 module.exports = sampleRouter;
