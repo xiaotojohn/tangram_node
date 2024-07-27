@@ -8,7 +8,7 @@ var tempStudent = {
     password: 'Targaryen'
 };
 
-const getStudentView = asyncHandler(
+const getStudentView = asyncHandler( // generating test login page for student
     async (req, res) => {
         res.render(viewpath + '/slogin', {
             title: 'Student Login Test Page',
@@ -16,7 +16,7 @@ const getStudentView = asyncHandler(
         });
 });
 
-const postStudentLogin = asyncHandler(
+const postStudentLogin = asyncHandler( // test login for student, will return the login info
     async (req, res) => {
         console.log(req.body);
         tempStudent = {
@@ -26,18 +26,20 @@ const postStudentLogin = asyncHandler(
         res.redirect('/student');
 });
 
-const getStudentRegister = asyncHandler(
+const getStudentRegister = asyncHandler( // generating test register page for student
     async (req, res) => {
         allStudents = await query.getAllStudents();
+        // console.log(allStudents);
         res.render('userViews/sregister', {
             title: 'Student Register Test Page',
             userInfo: allStudents
         });
 });
 
-const postStudentRegister = asyncHandler(
+const postStudentRegister = asyncHandler( // test register for student, will return all registered students
     async (req, res) => {
-        console.log(req.body);
+        // console.log('here we are !!!!!! at postStudentRegister');
+        // console.log(req.body);
         tempStudent = {
             username: req.body.username,
             password: req.body.password

@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const viewpath = 'userViews';
+const query = require('../db/querys.js');
 
 var tempTeacher = {
     username: 'Rhaenyra',
@@ -24,5 +25,32 @@ const postTeacherLogin = asyncHandler(
         res.redirect('/teacher');
 });
 
+const getTeacherRegister = asyncHandler( // generating test register page for teacher
+    async (req, res) => {
+        allTeachers = await query.getAllTeachers();
+        // console.log(allTeachers);
+        res.render('userViews/tregister', {
+            title: 'Teacher Register Test Page',
+            userInfo: allTeachers
+        });
+});
 
-module.exports = { getTeacherView, postTeacherLogin };
+const postTeacherRegister = asyncHandler( // test register for teacher, will return all registered teachers
+    async (req, res) => {
+        // console.log('here we are !!!!!! at postTeacherRegister');
+        // console.log(req.body);
+        tempTeacher = {
+            username: req.body.username,
+            password: req.body.password
+        };
+        await query.createNewTeacher(tempTeacher.username, tempTeacher.password);
+        res.redirect('/teacher/register');
+});
+
+const getTeacherSchedule = asyncHandler(
+    async (req, res) => {
+        const schedule = await query.getWeekSchedule();
+        res.json(schedule);
+});
+
+module.exports = { getTeacherView, postTeacherLogin, getTeacherRegister, postTeacherRegister, getTeacherSchedule };

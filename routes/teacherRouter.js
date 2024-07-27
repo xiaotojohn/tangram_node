@@ -6,6 +6,9 @@ teacherRouter.use(express.urlencoded({extended: true}));
 
 teacherRouter.get('/',tController.getTeacherView);
 teacherRouter.post('/login',tController.postTeacherLogin);
+teacherRouter.get('/register',tController.getTeacherRegister);
+teacherRouter.post('/register',tController.postTeacherRegister);
+teacherRouter.get('/schedule',tController.getTeacherSchedule);
 // teacherRouter.get('/register',tController.getTeacherRegister);
 // teacherRouter.post('/register',tController.postTeacherRegister);
 // those two lines shall belong to adminRouter.js

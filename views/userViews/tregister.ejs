@@ -1,0 +1,32 @@
+<html>
+  <body>
+    <h1>
+        <%= title %>
+    </h1>
+    <h2>
+       demo page for teacher creation. should be accessed by admin only. 
+    </h2>
+    <hr/>
+    <form action = '/teacher/register' method="post">
+        <input type="text" name="username" placeholder="username">
+        <input type="text" name="password" placeholder="password"> 
+        <button type="submit">login</button>
+    </form>
+    <hr/>
+    <h2>
+        This is all teacher information stored in the database.
+    </h2>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+        </tr>
+        <% for (let i = 0; i < userInfo.length; i++) { %>
+            <tr>
+                <td><%= userInfo[i].username %></td>
+                <td><%= userInfo[i].password %></td>
+            </tr>
+        <% } %>
+    </table>
+  </body>
+</html>

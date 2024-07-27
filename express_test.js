@@ -6,6 +6,7 @@ const {Pool} = require('pg');
 const app = express();
 // const fs = require('fs');
 const { error } = require("console");
+const cors = require('cors');
 var path = require('path');
 
 // view engine
@@ -48,6 +49,9 @@ app.use(function(req, res, next) {
     console.log('request path: ' + req.url);
     next();
 });
+
+// set up cors
+app.use(cors());
 
 // serve favicon, browser will request this file as a default
 app.get('/favicon.ico', (req,res) => {

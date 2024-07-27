@@ -40,6 +40,8 @@ listening on port 8080
 - database
 - user authentication
     - error handler for views
+    - API with Sessions
+    - password reset
 - cookies
 - deployment
     - reverse proxy apache -> express

@@ -1,11 +1,17 @@
 const pool = require('./pool.js');
 
-async function getAllStudents() {
+async function getAllStudents() { // this is a function that returns all students
     const query = 'SELECT * FROM dummystudents'; // query here
     
     const result = await pool.query(query);
     return result.rows;
-    // todo: it's not returning id, why?
+
+}
+
+async function getAllTeachers() { // this is a function that returns all teachers
+    const query = 'SELECT * FROM dummyteachers'; // query here
+    const result = await pool.query(query);
+    return result.rows;
 }
 
 async function createNewStudent(name,password) {
@@ -14,6 +20,14 @@ async function createNewStudent(name,password) {
     const result = await pool.query(query, [name, password]);
     return 0;
 }
+
+async function createNewTeacher(name,password) {
+    const query = "INSERT INTO dummyteachers (username, password) VALUES ($1, $2)"; // query here, wait wut? So the indexing starts at 1? wtf?
+    console.log(query, [name, password]);
+    const result = await pool.query(query, [name, password]);
+    return 0;
+}
+
 
 async function getLatestChats() {
     const query = "\
@@ -37,4 +51,35 @@ async function createNewChat(name, msg) {
     return 0;
 }
 
-module.exports = { getAllStudents, createNewStudent, getLatestChats, createNewChat };
+async function getWeekSchedule() {
+    const query = "SELECT\
+    c.courseid,\
+    c.coursename,\
+    c.starttime,\
+    c.endtime,\
+    s.username AS student_name,\
+    t.username AS teacher_name,\
+    c.weekday\
+    FROM \
+    weekcourses c\
+    JOIN \
+    dummystudents s ON c.studentid = s.id\
+    JOIN \
+    dummyteachers t ON c.teacherid = t.id\
+    ORDER BY \
+    c.courseid\
+" // query here
+    
+    const result = await pool.query(query);
+    return result.rows;
+}
+
+module.exports = { 
+    getAllStudents, 
+    getAllTeachers,
+    createNewStudent, 
+    createNewTeacher,
+    getLatestChats, 
+    createNewChat,
+    getWeekSchedule
+ };
