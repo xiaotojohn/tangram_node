@@ -19,6 +19,7 @@ const query = require('../db/querys.js');
 
 const getChatBoardViews = asyncHandler(async (req, res) => {
     const messages = await query.getLatestChats();
+    console.log(messages)
     res.render('chatBoard/chatBoard', {
         title: 'Chat Board',
         messages: messages
