@@ -4,7 +4,7 @@
     <title>Tangram - Home</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
     <!-- Scripts -->
     <script src="https://kit.fontawesome.com/0f2132a6f3.js" crossorigin="anonymous"></script>
     <script>
@@ -106,11 +106,14 @@
         }
         .hero{
             position: absolute;
-            top: 300px;
-            left: calc((100vw - 639px)/2);
+            display: block;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         .hero > p{
             margin: 5px;
+            width: 90vw;
         }
 
         .info{
@@ -143,9 +146,6 @@
             *{
                 font: 20px Futura, sans-serif;
             }
-            .hero{
-                left: calc(50vw - 355.6px);
-            }
             .info{
                 display: grid;
                 grid: auto / 2fr 3fr;
@@ -175,8 +175,6 @@
     <div id="overlay"></div>
     <div class="topnav">
         <a onclick="showlightbox()"><i class="fa-solid fa-user"></i></a>
-        <a href="w-schedule.html">Weekly Schedule</a>
-        <a href="d-schedule.html">Daily Schedule</a>
     </div>
 
     <div class="content">
@@ -184,8 +182,8 @@
         <div class="hero">
             <h1> 唐韵文化</h1>
             <p>Tangram Culture: A place for Chinese learning and cool stuff like that</p>
-            <button type="button">thing 1</button>
-            <button type="button">thing 2</button>
+            <button type="button"><a href="w-schedule.html">Weekly Schedule</a></button>
+            <button type="button"><a href="d-schedule.html">Daily Schedule</a></button>
         </div>
     </div>
 
@@ -203,7 +201,6 @@
             </p>
         </form>
     </div>
-
 
     <div class="info">
         <div class="left_side">
