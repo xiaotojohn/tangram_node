@@ -1,5 +1,5 @@
 //TO-DO LIST:
-// keyboard events if possible
+// keyboard events if possible?
 
 
 let months_eng = ["Janurary", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -11,8 +11,26 @@ let info = {
     "year": date.getFullYear(),
     "month": date.getMonth(),
     "date": date.getDate(),
-    "username": "hello",
-    "password": "idk",
+    "data": ""
+}
+
+// *********************************************************************************************************
+// *********************************************************************************************************
+// *********************************************************************************************************
+// *********************************************************************************************************
+// *********************************************************************************************************
+
+// functions for d-schedule.html
+
+// fetch info from a given url
+function getClassData(url){
+    fetch(url)
+    .then(response => response.json())
+    .then(data => displayClassInfo(data))
+}
+
+function displayClassInfo(data){
+    console.log(data)
 }
 
 // return an html string that contains all calendar info for given year and month
@@ -40,7 +58,7 @@ function buildCalendar(y, m){
     }
     for(let i = 0; i < numDays(y, m+1); i++){
         if ((i + 1) == info.today[2] && info.month == info.today[1] && info.year == info.today[0]){
-            mystring += "<div class = 'dates' style = 'border: 2px solid var(--red); background-color: var(--light);' id =" + y + "/" + (m+1) + "/" + (i+1) + " onclick = 'changeDateInfo(this.innerHTML)'>" + (i + 1) + "</div>"
+            mystring += "<div class = 'dates' style = 'border: 2px solid var(--light); background-color: var(--light);' id =" + y + "/" + (m+1) + "/" + (i+1) + " onclick = 'changeDateInfo(this.innerHTML)'>" + (i + 1) + "</div>"
         } else {
             mystring += "<div class = 'dates' id =" + y + "/" + (m+1) + "/" + (i+1) + " onclick = 'changeDateInfo(this.innerHTML)'>" + (i + 1) + "</div>"
         }
@@ -49,6 +67,7 @@ function buildCalendar(y, m){
 }
 
 // when a left/right button is pressed, change the month
+// chosen date is the same as previous chosen day
 function changeMonth(n){ // n is either +1 or -1 depending on which arrow was clicked
     if(n > 0){ // increase month
         if(info.month == 11){
@@ -67,7 +86,6 @@ function changeMonth(n){ // n is either +1 or -1 depending on which arrow was cl
     }
     document.querySelector(".date").innerHTML = months_eng[info.month] + " " + info.year
     document.querySelector(".days").innerHTML = "<div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>" + buildCalendar(info.year, info.month)
-    info.date = 1
     info.prev_chosen = info.year + "/" + (info.month + 1) + "/" + info.date
     document.getElementById(info.prev_chosen).style.border = "2px solid var(--red)"
     displayDateOnRight()
@@ -88,6 +106,7 @@ function changeDateInfo(d){
     // change current element to have red outline
     document.getElementById(info.year + "/" + (info.month + 1) + "/" + d).style.border = "2px solid var(--red)"
     info.prev_chosen = info.year + "/" + (info.month + 1) + "/" + d
+
 }
 
 // displays the clicked date on the right div
@@ -95,6 +114,7 @@ function displayDateOnRight(){
     document.querySelector("#date").innerHTML = "<h1>" + (info.month + 1) + "/" + info.date + "/" + info.year + "</h1>"
 }
 
+// downloads the right div as a png
 function downloadPNG(){
     const screenshotTarget = document.querySelector(".right-block");
     html2canvas(screenshotTarget).then((canvas) => {
@@ -106,38 +126,25 @@ function downloadPNG(){
 }
 
 
-function openLink(link){
-    window.open("https://" + link, "_blank")
-}
-
-function copyThis(thing, type){
-    console.log(thing)
-    navigator.clipboard.writeText(thing)
-    alert("Copied " + type + " to clipboard!")
-}
-
-
-
 // searchs the day that's in the input box
-function searchDate(){
-    y = document.querySelector("#Y").value
-    m = document.querySelector("#M").value - 1
-    if((y <= 2000 || y > 2500) || (m <= -1 || m >= 12)){
-        alert("Date unavailble")
-        document.querySelector("#Y").value = ""
-        document.querySelector("#M").value = ""
-    } else{
-        info.year = y
-        info.month = m
-        info.date = 1
-        document.querySelector(".date").innerHTML = months_eng[info.month] + " " + info.year 
-        document.querySelector(".days").innerHTML = document.querySelector(".days").innerHTML = "<div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>" + buildCalendar(info.year, info.month)
-        displayDateOnRight()
-        document.querySelector("#Y").value = ""
-        document.querySelector("#M").value = ""
-    }
-
-}
+// function searchDate(){
+//     y = document.querySelector("#Y").value
+//     m = document.querySelector("#M").value - 1
+//     if((y <= 2000 || y > 2500) || (m <= -1 || m >= 12)){
+//         alert("Date unavailble")
+//         document.querySelector("#Y").value = ""
+//         document.querySelector("#M").value = ""
+//     } else{
+//         info.year = y
+//         info.month = m
+//         document.querySelector(".date").innerHTML = months_eng[info.month] + " " + info.year 
+//         document.querySelector(".days").innerHTML = document.querySelector(".days").innerHTML = "<div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>" + buildCalendar(info.year, info.month)
+//         displayDateOnRight()
+//         document.querySelector("#Y").value = ""
+//         document.querySelector("#M").value = ""
+//         console.log(info)
+//     }
+// }
 
 // returns a list of T/F based on if classes were checked
 function UpdateRecords(){
@@ -156,6 +163,33 @@ function check(elem){
     }
 }
 
+function getWeekDayName(y, m, d){
+    const tempDate = new Date(y + "-" + (m + 1) + "-" + d)
+    return days_eng[tempDate.getDay()]
+}
+
+// *********************************************************************************************************
+// *********************************************************************************************************
+// *********************************************************************************************************
+// *********************************************************************************************************
+// *********************************************************************************************************
+
+// functions for w-schedule.html
+
+// builds the week days
+function buildWeek(){
+    d = info.today[2]
+    if(info.today[3] == 0){
+        w = 7
+    }else{
+        w = info.today[3]
+    }
+    for(let i = 0; i < 7; i++){
+        document.querySelector("." + days_eng[i]).innerHTML += " " + (d - w + i)
+    }
+}
+
+
 // *********************************************************************************************************
 // *********************************************************************************************************
 // *********************************************************************************************************
@@ -171,19 +205,6 @@ function showlightbox(){
     document.querySelector("#overlay").style.display = "block"
 }
 
-// function showlightbox_signin(response){
-//     console.log('yes we are here')
-//     if (response.response == "success"){
-//         hidelightbox()
-//         document.querySelector(".lightbox_signin").style.display = "block"
-//         document.querySelector("#overlay").style.display = "block"
-//     }
-//     else{
-//         console.log(response)
-//         alert("Incorrect Username or Password")
-//     }
-// }
-
 // hides the sign in light box
 function hidelightbox(){
     document.querySelector(".lightbox").style.display = "none"
@@ -196,30 +217,15 @@ function hidelightbox(){
 function signIn(){
     username = document.querySelector("#username").value
     password = document.querySelector("#password").value
-    // // send to server
-    // url = "http://localhost:8080/signin"
-    // feedback = fetch(url, {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //         username: username,
-    //         password: password
-    //     })
-    
-    // })
-    // console.log(feedback.JSON())
-
-
-
-
-
-    if(username == info.username && password == info.password){
-        console.log("hooray")
-    } else{
-        console.log("ohno")
-    }
     hidelightbox()
 }
 
+function openLink(link){
+    window.open("https://" + link, "_blank")
+}
+
+function copyThis(thing, type){
+    console.log(thing)
+    navigator.clipboard.writeText(thing)
+    alert("Copied " + type + " to clipboard!")
+}

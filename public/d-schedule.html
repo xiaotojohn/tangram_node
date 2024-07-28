@@ -14,6 +14,10 @@
                 document.querySelector(".date").innerHTML = months_eng[info.month] + " " + info.year 
                 document.querySelector(".days").innerHTML = document.querySelector(".days").innerHTML = "<div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>" + buildCalendar(info.year, info.month)
                 displayDateOnRight()
+                getClassData('http://localhost:8080/teacher/schedule')
+                // fetch('http://localhost:8080/teacher/schedule')
+                // .then(response => response.json())
+                // .then(data => console.log(data))
             }
         </script>
         <style>
@@ -28,14 +32,14 @@
             *{
                 color: var(--dark);
                 text-align: center;
-                font: 20px Futura, sans-serif;
+                font: 15px Futura, sans-serif;
             }
             body{
                 background-color: var(--lighter);
                 margin: 0px 5% 30px 5%;
             }
             button{
-                margin: 0px 15px 15px 15px;
+                margin: 15px;
             }
             h1,span{
                 color: var(--black);
@@ -98,7 +102,7 @@
                 transition: 0.3s;
                 cursor: pointer;
             }
-            form{
+            /* form{
                 background-color: var(--red);
                 border-radius: 5px;
                 margin: 10px 0px 20px 0px;
@@ -111,7 +115,7 @@
             }
             form > button{
                 margin-right: 10%;
-            }
+            } */
 
             .right-block{
                 display: block;
@@ -141,6 +145,9 @@
 
 
             @media only screen and (min-width: 1000px) {
+                *{
+                    font: 20px Futura, sans-serif;
+                }
                 .left-block{
                     display: inline-block;
                     width: 49%;
@@ -189,13 +196,13 @@
                         </h1>
                     </div>
                     <div class="days"></div>
-                    <form>
+                    <!-- <form>
                         <label for="Y">Y:</label>
                         <input type="text" id="Y" name="Y" placeholder="YYYY" maxlength="4" autocomplete="off"> 
                         <label for="M">M:</label>
                         <input type="text" id="M" name="M" placeholder="MM" maxlength="2" autocomplete="off">
                         <button type="button" onclick="searchDate()">Go</button>
-                    </form>
+                    </form> -->
                     <button class="btn" id="download" onclick='downloadPNG()'>Download This Day</button>
                     <button class="btn" id="back"><a href="index.html">Back to home</a></button>
                     <button class="btn" id="back"><a href="w-schedule.html">Weekly Schedule</a></button>

@@ -22,14 +22,16 @@
                 background-color: var(--lighter);
                 margin: 0px 5% 0px 5%;
             }
+            .weekday-titles,.weekdays{
+                display: grid;
+                grid: auto / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            }
         </style>
         <script src="script.js"></script>
         <script src="https://kit.fontawesome.com/0f2132a6f3.js" crossorigin="anonymous"></script>
         <script>
             window.onload = function(){
-                let date = new Date()
-                // solve the Sunday = 0 issue
-                console.log(date.getDate() - date.getDay() + 1)
+                buildWeek()
             }
         </script>
         <title>Tangram - Weekly Scheduling</title>
@@ -39,22 +41,22 @@
         <div class="container">
             <div class="top-block">
                 <div class="weekday-titles">
-                    <div class="mon">Mon</div>
-                    <div class="tue">Tue</div>
-                    <div class="wed">Wed</div>
-                    <div class="thu">Thu</div>
-                    <div class="fri">Fri</div>
-                    <div class="sat">Sat</div>
-                    <div class="sun">Sun</div>
+                    <div class="Monday">Mon</div>
+                    <div class="Tuesday">Tue</div>
+                    <div class="Wednesday">Wed</div>
+                    <div class="Thursday">Thu</div>
+                    <div class="Friday">Fri</div>
+                    <div class="Saturday">Sat</div>
+                    <div class="Sunday">Sun</div>
                 </div>
                 <div class="weekdays">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <div>yo</div>
+                    <div>yo</div>
+                    <div>yooo</div>
+                    <div>yo</div>
+                    <div>yo</div>
+                    <div>y</div>
+                    <div>g</div>
                 </div>
             </div>
             <div class="bottom-block">
