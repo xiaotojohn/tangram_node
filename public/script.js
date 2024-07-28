@@ -11,8 +11,7 @@ let info = {
     "year": date.getFullYear(),
     "month": date.getMonth(),
     "date": date.getDate(),
-    "username": "hello",
-    "password": "idk",
+    "data": ""
 }
 
 // *********************************************************************************************************
@@ -22,6 +21,17 @@ let info = {
 // *********************************************************************************************************
 
 // functions for d-schedule.html
+
+// fetch info from a given url
+function getClassData(url){
+    fetch(url)
+    .then(response => response.json())
+    .then(data => displayClassInfo(data))
+}
+
+function displayClassInfo(data){
+    console.log(data)
+}
 
 // return an html string that contains all calendar info for given year and month
 // each cell contains the changeDateInfo function
@@ -96,6 +106,7 @@ function changeDateInfo(d){
     // change current element to have red outline
     document.getElementById(info.year + "/" + (info.month + 1) + "/" + d).style.border = "2px solid var(--red)"
     info.prev_chosen = info.year + "/" + (info.month + 1) + "/" + d
+
 }
 
 // displays the clicked date on the right div
@@ -103,6 +114,7 @@ function displayDateOnRight(){
     document.querySelector("#date").innerHTML = "<h1>" + (info.month + 1) + "/" + info.date + "/" + info.year + "</h1>"
 }
 
+// downloads the right div as a png
 function downloadPNG(){
     const screenshotTarget = document.querySelector(".right-block");
     html2canvas(screenshotTarget).then((canvas) => {
@@ -149,6 +161,11 @@ function check(elem){
     } else {
         document.getElementById("events").children[elem.id].style.backgroundColor = "var(--yellow)"
     }
+}
+
+function getWeekDayName(y, m, d){
+    const tempDate = new Date(y + "-" + (m + 1) + "-" + d)
+    return days_eng[tempDate.getDay()]
 }
 
 // *********************************************************************************************************
@@ -200,11 +217,6 @@ function hidelightbox(){
 function signIn(){
     username = document.querySelector("#username").value
     password = document.querySelector("#password").value
-    if(username == info.username && password == info.password){
-        console.log("hooray")
-    } else{
-        console.log("ohno")
-    }
     hidelightbox()
 }
 
