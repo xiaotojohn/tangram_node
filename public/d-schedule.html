@@ -14,6 +14,10 @@
                 document.querySelector(".date").innerHTML = months_eng[info.month] + " " + info.year 
                 document.querySelector(".days").innerHTML = document.querySelector(".days").innerHTML = "<div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>" + buildCalendar(info.year, info.month)
                 displayDateOnRight()
+                getClassData('http://localhost:8080/teacher/schedule')
+                // fetch('http://localhost:8080/teacher/schedule')
+                // .then(response => response.json())
+                // .then(data => console.log(data))
             }
         </script>
         <style>
