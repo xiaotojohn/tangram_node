@@ -1,5 +1,15 @@
 // only run it once to populate the database
-
+// READ ME: HOW TO USE THIS
+// before writing your query, check if it is aleady in the historical queries
+// which are commented out below, if it is, dont run it again
+// if not follow the instructions below
+// write your query in this_query
+// write your params in this_params
+// run node db_populate.js
+// check the console for the output and test the database for changes
+// if it works, comment out the query and params and add them to the historical queries
+// if it doesnt work, check the console for errors and fix them
+// if you cant fix them, let @xiaotojohn know
 const pool = require('./db/pool.js');
 
 
@@ -12,18 +22,23 @@ function populate(query,params) {
     return 0;
 }
 
-
-const this_query = "\
-    INSERT INTO weekcourses (coursename, starttime, endtime, studentid, teacherid, weekday) VALUES\
-    ('Math', '08:00:00', '09:00:00', 1, 1, 'Monday'),\
-    ('Astrology', '10:00:00', '12:00:00', 1, 2, 'Tuesday'),\
-    ('Sniper 101', '18:00:00', '19:30:00', 3, 1, 'Wednesday'),\
-    ('Intro to Mars', '08:00:00', '19:00:00', 2, 2, 'Sunday'),\
-    ('Dragons!', '10:00:00', '12:00:00', 2, 1, 'Friday')\
-";
+const this_query = "";
 const this_params = [];
 
 // historical queries
+
+// populating schedule
+// const this_query = "\
+//     INSERT INTO weekcourses (coursename, starttime, endtime, studentid, teacherid, weekday) VALUES\
+//     ('Math', '08:00:00', '09:00:00', 1, 1, 'Monday'),\
+//     ('Astrology', '10:00:00', '12:00:00', 1, 2, 'Tuesday'),\
+//     ('Sniper 101', '18:00:00', '19:30:00', 3, 1, 'Wednesday'),\
+//     ('Intro to Mars', '08:00:00', '19:00:00', 2, 2, 'Sunday'),\
+//     ('Dragons!', '10:00:00', '12:00:00', 2, 1, 'Friday')\
+// ";
+// const this_params = [];
+
+
 
 // setting up week schedule table
 // const this_query = "\
