@@ -1,5 +1,17 @@
 const pool = require('./pool.js');
 
+async function getStudentByName(username) {
+    const query = 'SELECT * FROM dummystudents WHERE username = $1'; // query here
+    const result = await pool.query(query, [username]);
+    return result.rows[0];
+}
+
+async function getStudentById(id) {
+    const query = 'SELECT * FROM dummystudents WHERE id = $1'; // query here
+    const result = await pool.query(query, [id]);
+    return result.rows[0];
+}
+
 async function getAllStudents() { // this is a function that returns all students
     const query = 'SELECT * FROM dummystudents'; // query here
     
@@ -75,11 +87,12 @@ async function getWeekSchedule() {
 }
 
 module.exports = { 
+    getStudentByName,
     getAllStudents, 
     getAllTeachers,
     createNewStudent, 
     createNewTeacher,
     getLatestChats, 
     createNewChat,
-    getWeekSchedule
+    getWeekSchedule,
  };

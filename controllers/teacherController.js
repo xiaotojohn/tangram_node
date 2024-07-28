@@ -1,6 +1,8 @@
 const asyncHandler = require('express-async-handler');
 const viewpath = 'userViews';
 const query = require('../db/querys.js');
+const jsonHandlers = require('../models/jsonHandlers.js');
+const { json } = require('body-parser');
 
 var tempTeacher = {
     username: 'Rhaenyra',
@@ -49,7 +51,10 @@ const postTeacherRegister = asyncHandler( // test register for teacher, will ret
 
 const getTeacherSchedule = asyncHandler(
     async (req, res) => {
-        const schedule = await query.getWeekSchedule();
+        const schedule = await jsonHandlers.scheduleWeekFormatter(
+            await query.getWeekSchedule());
+
+        console.log(schedule);
         res.json(schedule);
 });
 

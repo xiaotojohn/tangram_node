@@ -1,19 +1,15 @@
 const asyncHandler = require('express-async-handler');
 const viewpath = 'userViews';
 const query = require('../db/querys.js');
-const { all } = require('../routes/indexRouter.js');
 
-var tempStudent = {
-    username: 'Deamon',
-    password: 'Targaryen'
-};
+let tempStudent;
+
 
 const getStudentView = asyncHandler( // generating test login page for student
     async (req, res) => {
-        res.render(viewpath + '/slogin', {
-            title: 'Student Login Test Page',
-            userInfo: tempStudent
-        });
+        // res.render(viewpath + '/slogin', {
+        //     title: 'Student Login Test Page'
+        // });
 });
 
 const postStudentLogin = asyncHandler( // test login for student, will return the login info

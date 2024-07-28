@@ -2,11 +2,15 @@
 require("dotenv").config(); // load the environment variables
 
 const express = require('express');
-const {Pool} = require('pg');
+// const {Pool} = require('pg'); // pool is set and run in db/pool.js
 const app = express();
 // const fs = require('fs');
-const { error } = require("console");
+// const { error } = require("console");
 const cors = require('cors');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
 var path = require('path');
 
 // view engine
