@@ -7,16 +7,19 @@
 <body>
   <% if (user) {%>
     <h1>WELCOME BACK <%= user.username %></h1>
-    <a href="/log-out">LOG OUT</a>
+    This is your student home page. You may able to do the following:
+    <ul>
+      <li>View your schedule</li>
+      <li>View your grades</li>
+      <li>View your attendance</li>
+      <li>View your assignments</li>
+      <li>View your teachers</li>
+      <li>Enroll new classes</li>
+      <li>Check Invoices</li>
+    </ul>
+    <a href="/student/logout">LOG OUT</a>
   <% } else { %>
-    <h1>please log in</h1>
-    <form action="/log-in" method="POST">
-      <label for="username">Username</label>
-      <input name="username" placeholder="username" type="text" />
-      <label for="password">Password</label>
-      <input name="password" type="password" />
-      <button>Log In</button>
-    </form>
+
   <%}%>
 </body>
 </html>

@@ -1,3 +1,4 @@
+const { get } = require('http');
 const pool = require('./pool.js');
 
 async function getStudentByName(username) {
@@ -88,6 +89,7 @@ async function getWeekSchedule() {
 
 module.exports = { 
     getStudentByName,
+    getStudentById,
     getAllStudents, 
     getAllTeachers,
     createNewStudent, 

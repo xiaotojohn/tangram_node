@@ -1,9 +1,11 @@
 This is a project for the purpose of education but also for production.
+Generally speaking, this is a open source web application for education companies, schools. 
+
 Contributors:
 - Dexin
 - xiaotojohn@gmail.com
 
-## How to Set it up?
+## How to Set it up? (For local test)
 - `node.js`&`nvm`&`npm`: follow this [link](https://nodejs.org/en/download/package-manager). Choose `V20.xx.x(LTS)` on `mac OS` using `nvm`
 - Find the [package json file](package.json), which contains all dependencies. **Enter your project directory in terminal**, then use ```npm install [package_name]``` to install the packages listed.
 - Luckily, we deployed our databased online, so you dont have to bother set it up.
@@ -37,11 +39,13 @@ listening on port 8080
 
 ### To do list
 - flowchart(business logic)
-- database
+- ~~database~~
 - user authentication
     - error handler for views
     - API with Sessions
     - password reset
+    - registration conflicts
+    - security of sessions, need to refer to more stuff on authentication.
 - cookies
 - deployment
     - reverse proxy apache -> express
@@ -54,6 +58,11 @@ listening on port 8080
     - teachers cannot register themselves, only be inserted by the admin
     - tbh, students shall not register themselves as well, an account shall be assigned. but we will talk about this.
 - more queries
-    - getAllstudents not returning id
+    - ~~getAllstudents not returning id~~
 - chatboard
     - refactor db, currently no id
+## Sample Students
+- Daemon Targaryen: imarriedmyniece 
+- Vhagar: meleytastesnice
+- youshould: workthistime
+- hello: lol

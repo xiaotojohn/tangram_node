@@ -11,23 +11,52 @@
 // if it doesnt work, check the console for errors and fix them
 // if you cant fix them, let @xiaotojohn know
 const pool = require('./db/pool.js');
+// const bcrypt = require('bcrypt');
 
-
-
-
-function populate(query,params) {
-    const result = pool.query(query, params);
+async function populate(query,params) {
+    const result = await pool.query(query, params);
     console.log(query, params);
     console.log('working.....');
     return 0;
 }
 
-const this_query = "";
-const this_params = [];
+const this_query = ""; // write your query here
+const this_params = []; // write your params here
 
-// historical queries
+// last line: execute the query
+populate(this_query,this_params);
 
-// populating schedule
+// HISTORICAL QUERIES: FOR REFERENCE ONLY, DO NOT RUN THEM //
+
+// ------------------------------------ encryted password in server side --------------------------------
+
+// async function getAllStudents() { // this is a function that returns all students
+//     const query = 'SELECT * FROM dummystudents'; // query here
+    
+//     const result = await pool.query(query);
+//     return result.rows;
+
+// }
+
+
+// async function updateStudentPasswords() {
+//     const students = await getAllStudents();
+//     console.log(students);
+
+//     for (let i = 0; i < students.length; i++) {
+//         let student = students[i];
+//         console.log(student);
+
+//         let query = 'UPDATE dummystudents SET password = $1 WHERE id = $2';
+//         let params = [bcrypt.hashSync(student.password, 10), student.id];
+        
+//         await populate(query, params); // await each populate call
+//     }
+// }
+
+// updateStudentPasswords();
+
+// ------------------------------------ populating schedule------------------------------------------------
 // const this_query = "\
 //     INSERT INTO weekcourses (coursename, starttime, endtime, studentid, teacherid, weekday) VALUES\
 //     ('Math', '08:00:00', '09:00:00', 1, 1, 'Monday'),\
@@ -39,8 +68,7 @@ const this_params = [];
 // const this_params = [];
 
 
-
-// setting up week schedule table
+// ------------------------------------ setting up week schedule table ------------------------------------
 // const this_query = "\
 //     CREATE TABLE weekcourses(\
 //         courseid INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,\
@@ -55,7 +83,7 @@ const this_params = [];
 // );";
 // const this_params = [];
 
-// setting up dummy teachers table
+// ------------------------------------ setting up dummy teachers table ------------------------------------
 // const this_query = "CREATE TABLE dummyteachers(\
 //     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,\
 //     username VARCHAR(255) NOT NULL,\
@@ -65,11 +93,10 @@ const this_params = [];
 
 
 
-// populating chat
+// ------------------------------------ populating chat table ----------------------------------------------
 // const this_query = 'INSERT INTO chat (name,timestamp,msg) VALUES ($1, $2, $3), ($4, $5, $6)';
 // const this_params = ['Dexin', new Date(), 'Yes.', 'Dexin', new Date(), 'But no.'];
 
 
-// last line
-populate(this_query,this_params);
+
 

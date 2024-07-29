@@ -4,13 +4,15 @@ require("dotenv").config(); // load the environment variables
 const express = require('express');
 // const {Pool} = require('pg'); // pool is set and run in db/pool.js
 const app = express();
+
 // const fs = require('fs');
 // const { error } = require("console");
 const cors = require('cors');
-const session = require('express-session');
+const session = require('express-session'); // seems they are not loaded in other scripts. Do they not pass to the next layer?
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt');
+const flash = require('express-flash');
+// const LocalStrategy = require('passport-local').Strategy;
+// const bcrypt = require('bcrypt');
 var path = require('path');
 
 // view engine
@@ -38,6 +40,7 @@ const PORT = process.env.PORT;
 app.listen(PORT,() => console.log('now listening on port ' + PORT));
 console.log('server started');
 
+
 // routes
 const indexRouter = require('./routes/indexRouter');
 const sampleRouter = require('./routes/sampleRouter');
@@ -47,6 +50,12 @@ const teacherRouter = require('./routes/teacherRouter');
 const chatRouter = require('./routes/chatRouter');
 
 // APP LEVEL MIDDLEWARE //
+
+// authentication related
+app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
+app.use(passport.session());
+app.use(express.urlencoded({ extended: false }));
+app.use(flash());
 
 // log the request path
 app.use(function(req, res, next) {
