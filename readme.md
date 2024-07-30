@@ -61,8 +61,12 @@ listening on port 8080
     - ~~getAllstudents not returning id~~
 - chatboard
     - refactor db, currently no id
+
+- 7.31 to be discussed
+    - show dx how to embed the student login into the index.html
 ## Sample Students
 - Daemon Targaryen: imarriedmyniece 
 - Vhagar: meleytastesnice
 - youshould: workthistime
+- czxczxc: dasdsad
 - hello: lol

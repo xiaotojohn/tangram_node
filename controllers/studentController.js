@@ -15,6 +15,8 @@ const getStudentView = asyncHandler( // generating test login page for student
         } 
         else {
             if (req.session.flash && Object.keys(req.session.flash).length > 0){
+                console.log('log in info here, when failed -----------------::');
+                console.log(req.user);
                 res.render(viewpath + '/slogin', {
                     title: 'Student Login Test Page',
                     user: req.user,

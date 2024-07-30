@@ -188,16 +188,16 @@
     </div>
 
     <div class="lightbox">
-        <form class="sign-in">
+        <form class="sign-in" action = "/student/login" method="post">
             <h2>Sign in to Tangram Culture</h2>
             <label for="username">Username</label> <br>
             <input type="text" id="username" name="username" autocomplete="username"> <br>
             <label for="password">Password</label> <br>
             <input type="password" id="password" name="password" autocomplete="off"> <br><br>
-            <button type="button" onclick="signIn()">Sign In</button>
+            <button type="submit">Sign In</button>
             <button type="button" onclick="hidelightbox()">Cancel</button>
             <p>
-                No account yet? <a href="#">Sign Up Here</a>
+                No account yet? <a href="/student/register">Sign Up Here</a>
             </p>
         </form>
     </div>
