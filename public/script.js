@@ -29,9 +29,28 @@ function getClassData(url){
     .then(data => displayClassInfo(data))
 }
 
+// displays the class information of a given weekday
 function displayClassInfo(data){
-    console.log(data)
+    //console.log(data)
+    info.data = data
+    document.querySelector("#events").innerHTML = ""
+    weekday = getWeekDayName(info.year, info.month, info.date)
+    if (data[weekday].length > 0){
+        for(let i = 0; i < data[weekday].length; i++){
+            let coursename = data[weekday][i].coursename
+            let starttime = data[weekday][i].starttime
+            starttime = starttime.substring(0, starttime.length - 3)
+            let endtime = data[weekday][i].endtime
+            endtime = endtime.substring(0, endtime.length - 3)
+            let student = data[weekday][i].student_name
+            let teacher = data[weekday][i].teacher_name
+            let newClass = document.createElement("p")
+            newClass.innerHTML = coursename + " (" + starttime + "-" + endtime + ") " + "<input type='checkbox' class='checkbox hideable' id=" + i + " onclick='check(this)'>" + "<br>" + teacher + "<br>" + student
+            document.querySelector("#events").appendChild(newClass)
+        }
+    }
 }
+
 
 // return an html string that contains all calendar info for given year and month
 // each cell contains the changeDateInfo function
@@ -106,7 +125,7 @@ function changeDateInfo(d){
     // change current element to have red outline
     document.getElementById(info.year + "/" + (info.month + 1) + "/" + d).style.border = "2px solid var(--red)"
     info.prev_chosen = info.year + "/" + (info.month + 1) + "/" + d
-
+    displayClassInfo(info.data)
 }
 
 // displays the clicked date on the right div
@@ -146,7 +165,7 @@ function downloadPNG(){
 //     }
 // }
 
-// returns a list of T/F based on if classes were checked
+// prints T/F based on if classes were checked
 function UpdateRecords(){
     numClasses = document.getElementById("events").children.length
     for (i = 0; i < numClasses; i++){
