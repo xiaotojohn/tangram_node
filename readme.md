@@ -7,7 +7,7 @@ Contributors:
 
 ## How to Set it up? (For local test)
 - `node.js`&`nvm`&`npm`: follow this [link](https://nodejs.org/en/download/package-manager). Choose `V20.xx.x(LTS)` on `mac OS` using `nvm`
-- Find the [package json file](package.json), which contains all dependencies. **Enter your project directory in terminal**, then use ```npm install [package_name]``` to install the packages listed.
+- Find the [package json file](package.json), which contains all dependencies. **Enter your project directory in terminal**, then use ```npm install ``` to install the packages listed.
 - Luckily, we deployed our databased online, so you dont have to bother set it up.
 - Run `node express-test.js` and you shall see the following message: 
 
