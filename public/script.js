@@ -48,6 +48,8 @@ function displayClassInfo(data){
             newClass.innerHTML = coursename + " (" + starttime + "-" + endtime + ") " + "<input type='checkbox' class='checkbox hideable' id=" + i + " onclick='check(this)'>" + "<br>" + teacher + "<br>" + student
             document.querySelector("#events").appendChild(newClass)
         }
+    }else{
+        document.querySelector("#events").innerHTML = "Woohoo, no class today :D"
     }
 }
 
