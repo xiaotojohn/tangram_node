@@ -1,35 +1,100 @@
 <html>
-  <body>
-    <h1>
-        <%= title %>
-    </h1>
-    <h2>
-        This page is connected to the database. Once you register, your information will be stored in the database.
-        And a success message will be displayed, along with your username and password.
-        Beaware, your password will be stored in plain text, as this is just a demo.
-    </h2>
-    <hr/>
-    <form action = '/student/register' method="post">
-        <input type="text" name="username" placeholder="username">
-        <input type="password" name="password" placeholder="password"> 
-        <button type="submit">Sign in!</button>
-    </form>
-    <hr/>
-    <h2>
-        This is all student information stored in the database.
-    </h2>
-    <table>
-        <tr>
-            <th>Username</th>
-            <th>Password</th>
-        </tr>
-        <% for (let i = 0; i < userInfo.length; i++) { %>
+    <head>
+        <script>
+            
+        </script>
+        <style>
+            body{
+                font: 20px Futura, sans-serif;
+                text-align: center;
+                margin: 20vh 10% 0px 10%;
+            }
+            h1{
+                font: 30px Futura, sans-serif;
+                font-weight: bold;
+            }
+            h2{
+                font: 25px Futura, sans-serif;
+                font-weight: normal;
+            }
+            #all{
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                width: 675px;
+                margin: 0px auto 0px auto;
+            }
+            input,button{
+                font: 20px Futura, sans-serif;
+                margin: 5px;
+            }
+            button{
+                border-radius: 10px;
+                border-width: 1px;
+                padding: 5px 10px;
+                background-color: #A62418;
+                color: white;
+            }
+            button:hover{
+                background-color: #E6B553;
+                color: #A62418;
+                transition: 0.5s;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>
+            Student Account Registration
+            <!-- <%= title %> -->
+            <!-- I changed the title in studetController.js but the title here didn't change? -->
+        </h1>
+        <!-- <h2>
+            This page is connected to the database. Once you register, your information will be stored in the database.
+            And a success message will be displayed, along with your username and password.
+            Be aware, your password will be stored in plain text, as this is just a demo.
+        </h2> -->
+        <div id="all">
+            <div id="information">
+                <p>
+                    Please remember your username and choose a password with a minimum of 8 letters
+                </p>
+            </div>
+            <div id="registration">
+                <p>
+                    Name Information
+                </p>
+                <form>
+                    <input type="text" name="last-name" placeholder="Last name (姓)">
+                    <br>
+                    <input type="text" name="first-name" placeholder="First name (名)">
+                </form>
+                <p>
+                    Login Information
+                </p>
+                <form action = '/student/register' method="post">
+                    <input type="text" name="username" placeholder="Username" readonly> 
+                    <br>
+                    <input type="password" name="password" placeholder="Password"> 
+                    <br>
+                    <button type="submit">Register Account</button>
+                </form>
+            </div>
+        </div>
+        <hr/>
+        <h2>
+            This is all student information stored in the database.
+        </h2>
+        <table>
             <tr>
-                <td><%= userInfo[i].username %></td>
-                <td><%= userInfo[i].password %></td>
+                <th>Username</th>
+                <th>Password</th>
             </tr>
-        <% } %>
-    </table>
-    <a href="/student">Back to sign in page</a>
-  </body>
+            <% for (let i = 0; i < userInfo.length; i++) { %>
+                <tr>
+                    <td><%= userInfo[i].username %></td>
+                    <td><%= userInfo[i].password %></td>
+                </tr>
+            <% } %>
+        </table>
+        <a href="/student">Back to sign in page</a>
+    </body>
 </html>
