@@ -84,7 +84,7 @@ const getStudentRegister = asyncHandler( // generating test register page for st
         allStudents = await query.getAllStudents();
         // console.log(allStudents);
         res.render('userViews/sregister', {
-            title: 'Student Register Test Page',
+            title: 'Register Student Account',
             userInfo: allStudents
         });
 });
