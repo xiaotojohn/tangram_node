@@ -1,7 +1,34 @@
 <html>
     <head>
         <script>
-            
+            function createUsername(){
+                let first = document.querySelector("#first").value
+                let last = document.querySelector("#last").value
+                if(first == "" || last == ""){
+                    alert("Please complete name section before generating a username")
+                }else if(!isAllLetters(first + last)){
+                    alert("Name cannot contain numbers or symbols, please try again")
+                }else{
+                    let username = last + first
+                    username = username.toLowerCase()
+                    document.querySelector("#username").value = username
+                }
+                document.querySelector("#register-btn").disabled = false
+            }
+            function isAllLetters(inputtxt){
+                var letters = /^[A-Za-z]+$/
+                if(inputtxt.match(letters)){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            function test(){
+                password = document.querySelector("#password").value
+                if (password.length < 8){
+                    alert("Please choose a password longer than 8 characters")
+                }
+            }
         </script>
         <style>
             body{
@@ -39,6 +66,10 @@
                 color: #A62418;
                 transition: 0.5s;
             }
+            button:disabled{
+                background-color: #580E04;
+                color: grey;
+            }
         </style>
     </head>
     <body>
@@ -63,19 +94,22 @@
                     Name Information
                 </p>
                 <form>
-                    <input type="text" name="last-name" placeholder="Last name (姓)">
+                    <input type="text" name="last-name" id="last" placeholder="Last name (姓)">
                     <br>
-                    <input type="text" name="first-name" placeholder="First name (名)">
+                    <input type="text" name="first-name" id="first" placeholder="First name (名)">
+                    <br>
+                    <button type="button" onclick="createUsername()">Create Username</button>
                 </form>
                 <p>
                     Login Information
                 </p>
                 <form action = '/student/register' method="post">
-                    <input type="text" name="username" placeholder="Username" readonly> 
+                    <input type="text" name="username" id="username" placeholder="Username" readonly> 
                     <br>
-                    <input type="password" name="password" placeholder="Password"> 
+                    <input type="password" name="password" id="password" placeholder="Password"> 
                     <br>
-                    <button type="submit">Register Account</button>
+                    <button type="button" onclick="test()">test</button>
+                    <button type="submit" id="register-btn" disabled>Register Account</button>
                 </form>
             </div>
         </div>
