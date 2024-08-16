@@ -34,7 +34,7 @@
             body{
                 font: 20px Futura, sans-serif;
                 text-align: center;
-                margin: 20vh 10% 0px 10%;
+                margin: 10vh 10% 0px 10%;
             }
             h1{
                 font: 30px Futura, sans-serif;
@@ -46,31 +46,43 @@
             }
             #all{
                 display: grid;
-                grid-template-columns: 1fr 2fr;
-                width: 675px;
+                grid-template-columns: 1fr 1fr;
+                width: 700px;
                 margin: 0px auto 0px auto;
             }
             input,button{
                 font: 20px Futura, sans-serif;
                 margin: 5px;
             }
+            #information{
+                text-align: left;
+                font-size: 18px;
+                background-color: #a6241835;
+                border-radius: 10px;
+                padding: 0px 15px;
+            }
+            #registration{
+                background-color: #E6B553;
+                border-radius: 10px;
+            }
             button{
                 border-radius: 10px;
                 border-width: 1px;
                 padding: 5px 10px;
-                background-color: #A62418;
-                color: white;
-            }
-            button:hover{
                 background-color: #E6B553;
                 color: #A62418;
+            }
+            button:hover{
+                background-color: #A62418;
+                color: white;
                 transition: 0.5s;
             }
             button:disabled{
-                background-color: #580E04;
-                color: grey;
+                background-color: #12121231;
+                color: #A62418;
             }
         </style>
+        <title>Tangram - Student Register</title>
     </head>
     <body>
         <h1>
@@ -85,8 +97,19 @@
         </h2> -->
         <div id="all">
             <div id="information">
+                <h2>Instructions:</h2>
                 <p>
-                    Please remember your username and choose a password with a minimum of 8 letters
+                    <ol>
+                        <li>Enter your last and first name</li>
+                        <br>
+                        <li>Create a username</li>
+                        <br>
+                        <li>Choose a password with a <b>minimum of 8 letters</b></li>
+                        <br>
+                        <li>Click "Register Account"</li>
+                    </ol>
+                    <br>
+                    * Please remember your password *
                 </p>
             </div>
             <div id="registration">
